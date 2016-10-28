@@ -1,20 +1,13 @@
 package com.dsz.activity;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.text.method.PasswordTransformationMethod;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -23,6 +16,7 @@ import android.widget.Toast;
 import com.dsz.adapter.ModelFragmentAdapter;
 import com.dsz.bean.AddNameBean;
 import com.dsz.db.AddNameSql;
+import com.dsz.widget.SelfDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -268,71 +262,114 @@ public class AddModelActivity extends FragmentActivity implements View.OnClickLi
         }
 
     }
-
+//    String d;
+    private SelfDialog selfDialog;
     private void confirmDialog() {
-        LayoutInflater inflater = getLayoutInflater();
-        View alertLayout = inflater.inflate(R.layout.layout_custom_dialog, null);
-        final EditText etUsername = (EditText) alertLayout.findViewById(R.id.et_username);
-        final EditText etPassword = (EditText) alertLayout.findViewById(R.id.et_password);
-        final CheckBox cbShowPassword = (CheckBox) alertLayout.findViewById(R.id.cb_show_password);
 
-        cbShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
+        selfDialog = new SelfDialog(context);
+//                selfDialog.setTitle("提示");
+//        selfDialog.setMessage("情景模式名称");
+        selfDialog.setYesOnclickListener("确定", new SelfDialog.onYesOnclickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // to encode password in dots
-                    etPassword.setTransformationMethod(null);
-                } else {
-                    // to display the password in normal text
-                    etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                }
-            }
-        });
+            public void onYesClick(final String txt) {
+                 String name =selfDialog.getTxt();
+//                Log.d(d + "rentg",d + "hao");
+                if(name.equals("") || name == null){
+                    Toast.makeText(getBaseContext(),"请输入名称",Toast.LENGTH_LONG).show();
 
-        @SuppressLint("NewApi")
-        AlertDialog.Builder alert = new AlertDialog.Builder(this,R.style.bg_color);
-        alert.setTitle("请输入模式名称");
-
-        // this is set the view from XML inside AlertDialog
-        alert.setView(alertLayout);
-
-        // disallow cancel of AlertDialog on click of back button and outside touch
-        alert.setCancelable(true);
-        alert.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getBaseContext(), "Cancel clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        alert.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String user = etUsername.getText().toString();
-                String pass = etPassword.getText().toString();
-                Toast.makeText(getBaseContext(), "添加数据成功", Toast.LENGTH_SHORT).show();
-//                            Intent in = new Intent();
-//                            in.putExtra("user",user);
-//                            addNameSql = new AddNameSql(SaveActivity.this);
-//                            addNameSql.open();
-
-                addNameBean = addNameSql.createRestaurant(user);
+                }else{
+                    Toast.makeText(getBaseContext(),"添加" + name + "成功",Toast.LENGTH_LONG).show();
+                    addNameBean = addNameSql.createRestaurant(name);
 
 
 //                            obj = datasource.createRestaurant(user,address , typeGroup.getCheckedRadioButtonId());
 //                    toast = Toast.makeText(context, edtName.getText().toString() + " has been inserted", Toast.LENGTH_SHORT);
 //                    toast.show();
 //                            Toast.makeText(SaveActivity.this, "nahoa" +address, Toast.LENGTH_SHORT).show();
-                addArray.add(addNameBean);
+                    addArray.add(addNameBean);
 
+                    selfDialog.dismiss();
+                }
 
             }
         });
-        AlertDialog dialog = alert.create();
-        dialog.show();
+        selfDialog.setNoOnclickListener("取消", new SelfDialog.onNoOnclickListener() {
+            @Override
+            public void onNoClick() {
+                Toast.makeText(getBaseContext(),"点击了--取消--按钮",Toast.LENGTH_LONG).show();
+                selfDialog.dismiss();
+            }
+        });
+        selfDialog.show();
+
+
+//        Toast.makeText(context, d, Toast.LENGTH_SHORT).show();
+
+
+//        LayoutInflater inflater = getLayoutInflater();
+//        View alertLayout = inflater.inflate(R.layout.layout_custom_dialog, null);
+//        final EditText etUsername = (EditText) alertLayout.findViewById(R.id.et_username);
+//        final EditText etPassword = (EditText) alertLayout.findViewById(R.id.et_password);
+//        final CheckBox cbShowPassword = (CheckBox) alertLayout.findViewById(R.id.cb_show_password);
+//
+//        cbShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    // to encode password in dots
+//                    etPassword.setTransformationMethod(null);
+//                } else {
+//                    // to display the password in normal text
+//                    etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+//                }
+//            }
+//        });
+//
+//        @SuppressLint("NewApi")
+//        AlertDialog.Builder alert = new AlertDialog.Builder(this,R.style.bg_color);
+//        alert.setTitle("请输入模式名称");
+//
+//        // this is set the view from XML inside AlertDialog
+//        alert.setView(alertLayout);
+//
+//        // disallow cancel of AlertDialog on click of back button and outside touch
+//        alert.setCancelable(true);
+//        alert.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                Toast.makeText(getBaseContext(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        alert.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                String user = etUsername.getText().toString();
+//                String pass = etPassword.getText().toString();
+//                Toast.makeText(getBaseContext(), "添加数据成功", Toast.LENGTH_SHORT).show();
+////                            Intent in = new Intent();
+////                            in.putExtra("user",user);
+////                            addNameSql = new AddNameSql(SaveActivity.this);
+////                            addNameSql.open();
+//
+//                addNameBean = addNameSql.createRestaurant(user);
+//
+//
+////                            obj = datasource.createRestaurant(user,address , typeGroup.getCheckedRadioButtonId());
+////                    toast = Toast.makeText(context, edtName.getText().toString() + " has been inserted", Toast.LENGTH_SHORT);
+////                    toast.show();
+////                            Toast.makeText(SaveActivity.this, "nahoa" +address, Toast.LENGTH_SHORT).show();
+//                addArray.add(addNameBean);
+//
+//
+//            }
+//        });
+//        AlertDialog dialog = alert.create();
+//        dialog.show();
 
     }
 }
