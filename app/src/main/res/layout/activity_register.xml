@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/RegisterBack"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:background="#4169E1"
+            android:src="@mipmap/back" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="#4169E1"
+            android:text="注册账号"
+            android:textColor="#FFFFFFFF"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:background="#4169E1" />
+    </LinearLayout>
+	
+   <Button 
+       android:layout_width="match_parent"
+       android:layout_height="20dp"
+       android:background="@null"
+       />
+    
+    
+    <LinearLayout
+        
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFFFF"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@null"
+            android:gravity="center"
+            android:text="手机号:" />
+
+        <EditText
+            android:id="@+id/PhoneEditText1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:background="@null"
+            android:ems="10"
+            android:hint="请输入手机号" >
+        </EditText>
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:background="@mipmap/line" />
+    
+     <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FFFFFFFF"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="验证码:" />
+
+            <EditText
+                android:id="@+id/VerifyEditText1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:ems="10"
+                android:hint="验证码"
+                android:background="@null"
+                >
+            </EditText>
+            
+            <Button 
+                android:id="@+id/getCAPTCHA1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_gravity="center"
+                android:text="获得验证码"
+                android:textSize="15sp"
+                android:background="@null"
+                />
+        </LinearLayout>
+    	
+     <Button
+            android:id="@+id/Nextbutton1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="40dp"
+            android:background="#FF822E"
+            android:text="下一步"
+            android:textColor="#FFFFFFFF" />
+     
+    
+
+</LinearLayout>

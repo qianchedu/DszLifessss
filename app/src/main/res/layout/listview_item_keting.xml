@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <ImageButton
+            android:layout_marginTop="8dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="@mipmap/ic_launcher"
+            android:id="@+id/jujia_sb_btn" />
+        <TextView
+            android:id="@+id/_sb_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#282828"
+            android:layout_marginLeft="12dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/jujia_sb_btn"
+            android:layout_toEndOf="@+id/jujia_sb_btn"
+
+            />
+        <ImageButton
+            android:id="@+id/jujia_kg_btn"
+            android:layout_width="50dp"
+            android:layout_height="18dp"
+            android:background="@mipmap/off"
+            android:layout_marginTop="23dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+             />
+    </RelativeLayout>
+
+</LinearLayout>

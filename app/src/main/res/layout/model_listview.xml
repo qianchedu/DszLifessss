@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    xmlns:switchbutton="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="12dp"
+        android:layout_weight="2">
+
+        <ImageView
+            android:id="@+id/add_model_icon_imageView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@mipmap/view_icon_01_nor" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="12dp"
+        android:layout_weight="4"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/add_model_txt_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center_vertical"
+            android:text="@string/app_name"
+            android:textColor="#282828"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <com.dsz.widget.SwitchButton
+        android:id="@+id/add_model_msg_switchbutton"
+        android:layout_width="50dp"
+        android:layout_height="18dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="12dp" />
+
+
+        <!--<com.powerful.widget.SwitchButton-->
+            <!--android:id="@+id/add_model_msg_switchbutton"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="18dp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:paddingRight="12dp"-->
+            <!--switchbutton:switchbackground="@drawable/view_button_01_nor"-->
+            <!--switchbutton:switchcursor="@drawable/switch_white_1"-->
+            <!--/>-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/add_model_msg_switchbutton"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="18dp"-->
+        <!--android:paddingRight="12dp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true" />-->
+    </RelativeLayout>
+
+
+</LinearLayout>
