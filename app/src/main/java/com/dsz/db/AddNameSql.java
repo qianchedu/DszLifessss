@@ -120,7 +120,7 @@ public class AddNameSql {
      */
     private AddNameBean cursorToRestaurant(Cursor cursor) {
         AddNameBean restaurant = new AddNameBean();
-        restaurant.setId(cursor.getLong(0));
+        restaurant.setId(cursor.getInt(0));
         restaurant.setName(cursor.getString(1));
         return restaurant;
     }

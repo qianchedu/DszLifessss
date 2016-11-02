@@ -14,8 +14,8 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.dsz.adapter.ModelFragmentAdapter;
-import com.dsz.bean.AddNameBean;
-import com.dsz.db.AddNameSql;
+import com.dsz.bean.ModelAddName;
+import com.dsz.db.ModelAddDB;
 import com.dsz.widget.SelfDialog;
 
 import java.util.ArrayList;
@@ -29,9 +29,12 @@ import java.util.Map;
  */
 public class AddModelActivity extends FragmentActivity implements View.OnClickListener {
 //    RestaurantModel obj = new RestaurantModel();
-    AddNameBean addNameBean = new AddNameBean();
-    private AddNameSql addNameSql;
-    ArrayAdapter<AddNameBean> addArray;
+//    AddNameBean addNameBean = new AddNameBean();
+    ModelAddName modelAddName = new ModelAddName();
+//    private AddNameSql addNameSql;
+    private ModelAddDB modelAddDB;
+//    ArrayAdapter<AddNameBean> addArray;
+    ArrayAdapter<ModelAddName> addArray;
 
     public static final int TAB_LIVING_ROOM = 0;
     public static final int TAB_MASTER_ROOM = 1;
@@ -192,10 +195,15 @@ public class AddModelActivity extends FragmentActivity implements View.OnClickLi
     }
 
     private void initView() {
-        addNameSql = new AddNameSql(AddModelActivity.this);
-        addNameSql.open();
-        List<AddNameBean> listBean = addNameSql.getAllRestaurants();
-        addArray = new ArrayAdapter<AddNameBean>(this, android.R.layout.simple_list_item_1, listBean);
+//        addNameSql = new AddNameSql(AddModelActivity.this);
+//        addNameSql.open();
+//        List<AddNameBean> listBean = addNameSql.getAllRestaurants();
+//        addArray = new ArrayAdapter<AddNameBean>(this, android.R.layout.simple_list_item_1, listBean);
+
+        modelAddDB = new ModelAddDB(AddModelActivity.this);
+        List<ModelAddName> listBean = modelAddDB.getAllModel();
+        addArray = new ArrayAdapter<ModelAddName>(this,android.R.layout.simple_list_item_1,listBean);
+
         model_back_iv = (ImageView) findViewById(R.id.add_model_back_imageview);
         model_main_btn = (Button) findViewById(R.id.add_model_confirm_btn);
 
@@ -280,14 +288,19 @@ public class AddModelActivity extends FragmentActivity implements View.OnClickLi
 
                 }else{
                     Toast.makeText(getBaseContext(),"添加" + name + "成功",Toast.LENGTH_LONG).show();
-                    addNameBean = addNameSql.createRestaurant(name);
 
+
+//                    addNameBean = addNameSql.createRestaurant(name);
+                        modelAddName = new ModelAddName(name,"ni",false);
+                    modelAddDB.insert(modelAddName);
 
 //                            obj = datasource.createRestaurant(user,address , typeGroup.getCheckedRadioButtonId());
 //                    toast = Toast.makeText(context, edtName.getText().toString() + " has been inserted", Toast.LENGTH_SHORT);
 //                    toast.show();
 //                            Toast.makeText(SaveActivity.this, "nahoa" +address, Toast.LENGTH_SHORT).show();
-                    addArray.add(addNameBean);
+
+//                    addArray.add(addNameBean);
+                    addArray.add(modelAddName);
 
                     selfDialog.dismiss();
                 }

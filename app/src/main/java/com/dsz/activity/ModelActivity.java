@@ -11,8 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dsz.adapter.ModelListViewAdapter;
-import com.dsz.bean.AddNameBean;
-import com.dsz.db.AddNameSql;
+import com.dsz.bean.ModelAddName;
+import com.dsz.db.ModelAddDB;
 
 import java.util.List;
 
@@ -25,12 +25,23 @@ public class ModelActivity extends Activity {
     private TextView id_model;
     private ImageView model_back;
     private TextView model_main;
-    private AddNameSql addNameSql;
+//    private AddNameSql addNameSql;
+    private ModelAddDB modelAddDB;
     ModelListViewAdapter modelListViewAdapter;
 
     ListView listView;
-    List<AddNameBean> listAddName;
-    AddNameBean addNameBean;
+
+//    List<AddNameBean> listAddName;
+//    AddNameBean addNameBean;
+    List<ModelAddName> listAddModelName;
+
+
+
+    ModelAddName modelAddName;
+
+    private boolean delState=false;
+    private int lastPress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,21 +52,110 @@ public class ModelActivity extends Activity {
         model_main.setOnClickListener(new model_mainOnclicklistener());
         listView = (ListView) findViewById(R.id.model_msg_listview);
 
-        addNameSql = new AddNameSql(this);
-        addNameSql.open();
+        modelAddDB = new ModelAddDB(ModelActivity.this);
 
-        listAddName = addNameSql.getAllRestaurants();
+//        addNameSql = new AddNameSql(this);
+//        addNameSql.open();
 
-        modelListViewAdapter = new ModelListViewAdapter(this,listAddName);
+//        listAddName = addNameSql.getAllRestaurants();
+//
+//        modelListViewAdapter = new ModelListViewAdapter(this,listAddName);
+
+        listAddModelName =modelAddDB.getAllModel();
+
+
+
+
+        modelListViewAdapter = new ModelListViewAdapter(this,listAddModelName);
+
 
         listView.setAdapter(modelListViewAdapter);
 
+//        listView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(ModelActivity.this, "nihao", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+
+
+
+
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            private View deleview;
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ModelActivity.this, ":" + modelListViewAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+//                Toast.makeText(ModelActivity.this, ":" + modelListViewAdapter.getItem(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ModelActivity.this, ":" + position, Toast.LENGTH_SHORT).show();
+
+
+                if (delState) {
+                    if (lastPress < parent.getCount()) {
+                        View delview = parent.getChildAt(lastPress).findViewById(R.id.model_dele_layout);
+                        if (null != delview) {
+                            delview.setVisibility(View.GONE);
+                        }
+                    }
+                    delState = false;
+                }
+                if (lastPress < parent.getCount()) {
+                    deleview = parent.getChildAt(position).findViewById(R.id.model_dele_layout);
+                    if (null != deleview) {
+                        deleview.setVisibility(View.GONE);
+                    }
+                }
+                deleview = parent.getChildAt(position).findViewById(R.id.model_dele_layout);
+                deleview.setVisibility(View.VISIBLE);
+
+                deleview.findViewById(R.id.model_cancel_sb).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleview.setVisibility(View.GONE);
+                        //adapter.notifyDataSetChanged();
+                    }
+                });
+                ;
+                deleview.findViewById(R.id.model_dele_sb).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleview.setVisibility(View.GONE);
+//                            dbcon.initDB(mylist,KETING);
+//                        long id = listAddName.get(position).getId();
+//                        addNameSql.deleteRestaurant(id);
+                        //dbcon.getData();
+
+
+                        int deleteID = listAddModelName.get(position).getModelID();
+
+                        ModelAddName mo = new ModelAddName(deleteID);
+
+                        modelAddDB.deleteModel(mo);
+
+                        listAddModelName =modelAddDB.getAllModel();
+                        modelListViewAdapter = new ModelListViewAdapter(ModelActivity.this,listAddModelName);
+                        listView.setAdapter(modelListViewAdapter);
+
+                        Toast.makeText(ModelActivity.this, "position:" + position, Toast.LENGTH_SHORT).show();
+
+                        modelListViewAdapter.notifyDataSetChanged();
+                    }
+                });
+
+
+
+                delState = true;
+                lastPress = position;
 
                 return true;
+            }
+        });
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             }
         });
 
@@ -84,15 +184,18 @@ public class ModelActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        addNameSql = new AddNameSql(this);
-        addNameSql.open();
+//        addNameSql = new AddNameSql(this);
+//        addNameSql.open();
 
 //        listRestaurant = datasource.getAllRestaurants();
-        listAddName = addNameSql.getAllRestaurants();
+//        listAddName = addNameSql.getAllRestaurants();
+
+        modelAddDB = new ModelAddDB(this);
+        listAddModelName = modelAddDB.getAllModel();
 
 
 
-        modelListViewAdapter = new ModelListViewAdapter(this,listAddName);
+        modelListViewAdapter = new ModelListViewAdapter(this,listAddModelName);
 
         listView.setAdapter(modelListViewAdapter);
     }

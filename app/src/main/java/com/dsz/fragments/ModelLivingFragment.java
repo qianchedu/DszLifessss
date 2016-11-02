@@ -30,6 +30,7 @@ public class ModelLivingFragment extends Fragment implements AdapterView.OnItemC
     private Button fragment_add_model_text = null;
     private AddModelAdapter mAdapter = null;
     ImageView imageView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= View.inflate(getActivity(), R.layout.fragment_add_model,null);

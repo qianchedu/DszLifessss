@@ -71,7 +71,7 @@ public class SelfDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_dialog);
+        setContentView(R.layout.model_add_dialog);
         //按空白处不能取消动画
         setCanceledOnTouchOutside(true);
 

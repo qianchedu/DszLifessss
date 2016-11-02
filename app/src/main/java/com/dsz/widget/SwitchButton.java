@@ -20,6 +20,19 @@ public class SwitchButton extends View {
     private Bitmap mSlideImage;// 滑动块的图片
     private Paint paint = new Paint();//创建一个画笔
 
+    public int getSwitchID() {
+        return switchID;
+    }
+
+    public void setSwitchID(int switchID) {
+        this.switchID = switchID;
+    }
+
+    private int switchID;
+
+
+
+
     public boolean isOpened() {
         return isOpened;
     }
@@ -138,9 +151,20 @@ public class SwitchButton extends View {
                     // 打开的
                     float wide = backWidth - slideWidth;
                     canvas.drawBitmap(mSlideImage,wide - space, space, paint);
+//                    ModelAddName modelAddName = new ModelAddName(2,isOpened);
+//                    ModelAddDB modelAddDB = new ModelAddDB(getContext());
+//                    modelAddDB.updateModel(modelAddName);
+
+
+
+
+
                 } else {
                     // 关闭的
                     canvas.drawBitmap(mSlideImage, space, space, paint);
+//                    ModelAddName modelAddName = new ModelAddName(2,isOpened);
+//                    ModelAddDB modelAddDB = new ModelAddDB(getContext());
+//                    modelAddDB.updateModel(modelAddName);
                 }
                 break;
             default:

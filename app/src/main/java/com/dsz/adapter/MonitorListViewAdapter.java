@@ -125,13 +125,20 @@ public class MonitorListViewAdapter extends BaseAdapter {
 //        Display viewss = dialog.getWindow().getWindowManager().getDefaultDisplay();
 
 
-        screenWidth =     1080;
-        screenHeight =   1920;
+        WindowManager wm = (WindowManager) mContext
+                .getSystemService(Context.WINDOW_SERVICE);
+
+        int width = wm.getDefaultDisplay().getWidth();
+        int height = wm.getDefaultDisplay().getHeight();
+
+        screenWidth =     width;
+        screenHeight =   height;
 
 
         Log.d(TAG,screenWidth + "和");
         Log.d(TAG,screenHeight + "和");
-        final Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.move_right_01);
+        final Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.a);
+
         bitmapWidth = bitmap.getWidth();
         bitmapHeight = bitmap.getHeight();
 
